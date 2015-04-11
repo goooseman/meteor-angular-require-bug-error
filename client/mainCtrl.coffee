@@ -5,6 +5,6 @@ angular.module('requireUserBug').controller 'MainCtrl', [
   '$state'
   '$log'
   ($scope, $meteor, $rootScope, $state, $log) ->
-    $log.log 'Ctrl'
+    $log.log $rootScope.currentUser
 
 ]

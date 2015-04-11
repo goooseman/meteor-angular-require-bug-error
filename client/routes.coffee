@@ -10,6 +10,21 @@ angular.module('requireUserBug').run [
       return
     return
 ]
+
+
+currentUserCheck = ['$q', '$timeout', '$http', '$state', '$rootScope', '$log', ($q, $timeout, $http, $state, $rootScope, $log) ->
+  $log.log $rootScope.currentUser
+]
+
+
+justRestrict = ['$q', ($q) ->
+
+  $q.reject()
+
+]
+
+
+
 angular.module('requireUserBug').config [
   '$urlRouterProvider'
   '$stateProvider'
@@ -20,7 +35,7 @@ angular.module('requireUserBug').config [
       url: '/allow-all'
       templateUrl: 'client/views/allow-all.ng.html'
       controller: 'MainCtrl'
-    ).state 'restrict',
+    ).state('restrict',
       url: '/restrict'
       templateUrl: 'client/views/restrict.ng.html'
       controller: 'MainCtrl'
@@ -29,6 +44,22 @@ angular.module('requireUserBug').config [
         ($meteor) ->
           $meteor.requireUser()
       ]
+    ).state('check',
+      url: '/check'
+      templateUrl: 'client/views/check.ng.html'
+      controller: 'MainCtrl'
+      resolve: {
+        check: currentUserCheck
+      }
+    ).state('check-without-meteor',
+      url: '/check-without-meteor'
+      templateUrl: 'client/views/check-without-meteor.ng.html'
+      controller: 'MainCtrl'
+      resolve: {
+        check: justRestrict
+      }
+    )
+
     $urlRouterProvider.otherwise '/allow-all'
     return
 ]
