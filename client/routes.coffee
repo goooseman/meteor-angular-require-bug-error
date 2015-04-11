@@ -1,12 +1,12 @@
 angular.module('requireUserBug').run [
   '$rootScope'
-  '$location'
-  ($rootScope, $location) ->
-    $rootScope.$on '$stateChangeError', (event, next, previous, error) ->
+  '$state'
+  ($rootScope, $state) ->
+    $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
 # We can catch the error thrown when the $requireUser promise is rejected
 # and redirect the user back to the main page
       if error == 'AUTH_REQUIRED'
-        $location.path '/allow-all'
+        $state.go 'allowAll'
       return
     return
 ]
