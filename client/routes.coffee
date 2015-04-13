@@ -44,6 +44,14 @@ angular.module('requireUserBug').config [
         ($meteor) ->
           $meteor.requireUser()
       ]
+    ).state('tests',
+      url: '/tests'
+      templateUrl: 'client/views/tests.ng.html'
+      controller: 'TestsCtrl'
+    ).state('test',
+      url: '/tests/:testId'
+      templateUrl: 'client/views/test.ng.html'
+      controller: 'TestCtrl'
     ).state('check',
       url: '/check'
       templateUrl: 'client/views/check.ng.html'
