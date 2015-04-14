@@ -5,7 +5,7 @@ angular.module('requireUserBug').controller 'TestsCtrl', [
   '$state'
   '$log'
   ($scope, $meteor, $rootScope, $state, $log) ->
-    $scope.tests = $meteor.collection(Tests).subscribe('tests')
+    $scope.tests = $meteor.collection(Tests);
 ]
 
 angular.module('requireUserBug').controller 'TestCtrl', [
