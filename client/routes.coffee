@@ -47,11 +47,25 @@ angular.module('requireUserBug').config [
     ).state('tests',
       url: '/tests'
       templateUrl: 'client/views/tests.ng.html'
-      controller: 'TestsCtrl'
+      controller: 'TestsCtrl',
+      resolve : {
+        'testsData' : [
+          '$meteorSubscribe',
+          ($meteorSubscribe) ->
+            $meteorSubscribe.subscribe('tests');
+        ]
+      }
     ).state('test',
       url: '/tests/:testId'
       templateUrl: 'client/views/test.ng.html'
-      controller: 'TestCtrl'
+      controller: 'TestCtrl',
+      resolve : {
+        'testsData' : [
+          '$meteorSubscribe',
+          ($meteorSubscribe) ->
+            $meteorSubscribe.subscribe('tests');
+        ]
+      }
     ).state('check',
       url: '/check'
       templateUrl: 'client/views/check.ng.html'
